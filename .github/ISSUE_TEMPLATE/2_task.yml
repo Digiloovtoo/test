@@ -1,0 +1,19 @@
+name: 🔵 Tehniline ülesanne (Task)
+description: Ülesanne, mis ei ole otseselt kasutajalugu (nt seadistus, analüüs)
+title: "[Task]: <Ülesande nimi>"
+labels: ["task"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Kirjeldus
+      description: Mida on vaja teha?
+    validations:
+      required: true
+  - type: textarea
+    id: todo
+    attributes:
+      label: Tegevuste nimekiri
+      placeholder: |
+        - [ ] Tegevus 1
+        - [ ] Tegevus 2

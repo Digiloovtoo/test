@@ -1,0 +1,78 @@
+name: Initsialiseeri Digiloovtöö Projekt
+on:
+  push:
+    branches: [main, master]
+    paths:
+      - "README.md" # Käivitub vaid siis, kui README faili muudetakse või esmasel loomisel
+
+jobs:
+  create-issues:
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      contents: read
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Loo sildid ja esialgsed ülesanded
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # Defineerime tekstid siin, et vältida Bashi süntaksivigu
+          BODY_SEADISTUS: |
+            Selleks, et tööd hallata, tuleb luua tahvel.
+
+            1. Vali ülevalt menüüst **Projects**.
+            2. Vajuta rohelist nuppu **Link a project** -> **New project**.
+            3. Vali **Board** mall.
+            4. Pane nimeks 'Digiloovtöö' ja salvesta.
+            5. Tule siia tagasi ja märgi see ülesanne tehtuks!
+
+          BODY_ANALUYS: |
+            ## Ülesanne
+            Luuakse projekti sihtrühma persoonad ja kasutusstsenaariumid.
+
+            - [ ] Loo Wiki leht 'Persoonad'
+            - [ ] Lisa vähemalt 2 persoonat piltide ja kirjeldusega
+            - [ ] Loo Wiki leht 'Stsenaariumid'
+
+          BODY_PLANEERIMINE: |
+            Vaadake tiimiga üle 'Persoonad' ja otsustage, mida teete esimeses sprindis.
+
+            - [ ] Loo User Storyd (kasutades vastavat Issue malli)
+            - [ ] Hinda tööde mahtu
+
+        run: |
+          # 1. Kontrollime, kas issuesid juba on
+          COUNT=$(gh issue list --state all --json number --jq length)
+
+          if [ "$COUNT" -eq "0" ]; then
+            echo "Alustan projekti initsialiseerimist..."
+
+            # 2. LOOME SILDID
+            gh label create "seadistus" --color "fbca04" --description "Projekti ülesseadmine" --force
+            gh label create "analüüs" --color "0e8a16" --description "Uuringud ja analüüs" --force
+            gh label create "planeerimine" --color "5319e7" --description "Sprintide planeerimine" --force
+
+            # 3. LOOME ÜLESANDED
+            # Kasutame üleval defineeritud muutujaid ($BODY_...)
+            
+            gh issue create \
+              --title "SAMM 1: Seadista Projektitahvel (Board)" \
+              --body "$BODY_SEADISTUS" \
+              --label "seadistus"
+
+            gh issue create \
+              --title "Persoonade ja stsenaariumide loomine" \
+              --body "$BODY_ANALUYS" \
+              --label "analüüs"
+
+            gh issue create \
+              --title "Esimese Sprindi planeerimine" \
+              --body "$BODY_PLANEERIMINE" \
+              --label "planeerimine"
+              
+            echo "Esialgsed ülesanded ja sildid edukalt loodud!"
+          else
+            echo "Ülesanded on juba olemas, ei loo uuesti."
+          fi

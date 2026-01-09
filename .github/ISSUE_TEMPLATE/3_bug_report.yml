@@ -1,0 +1,51 @@
+name: 🐛 Vearaport (Bug Report)
+description: Teata katkisest funktsionaalsusest või veast
+title: "[Bug]: <Vea lühikirjeldus>"
+labels: ["bug"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Vea kirjeldus
+      description: Kirjelda lühidalt, mis läks valesti.
+      placeholder: |
+        Nt: Kui vajutan "Logi sisse", siis leht läheb valgeks ja midagi ei juhtu.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Kuidas viga tekkis? (Sammud)
+      description: Kirjelda samme, et arendaja saaks viga korrata.
+      placeholder: |
+        1. Mine avalehele
+        2. Vajuta nupule "Galerii"
+        3. Proovi avada esimest pilti
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Oodatud tulemus
+      description: Mis oleks pidanud juhtuma?
+      placeholder: Pilt oleks pidanud avanema suures vaates.
+
+  - type: input
+    id: environment
+    attributes:
+      label: Keskkond (Brauser/Seade)
+      description: Mis seadmega viga ilmnes?
+      placeholder: nt Chrome, Windows 10, Android telefon, VR prillid...
+
+  - type: dropdown
+    id: severity
+    attributes:
+      label: Kriitilisus
+      options:
+        - Kriitiline (Rakendus ei tööta üldse)
+        - Keskmine (Segab kasutamist, aga saab mööda minna)
+        - Madal (Iluviga või tekstiviga)
+    validations:
+      required: true

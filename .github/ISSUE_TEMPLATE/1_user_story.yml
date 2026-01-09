@@ -1,0 +1,38 @@
+name: 🟢 Kasutajalugu (User Story)
+description: Kirjelda funktsionaalsust läbi kasutaja vaatenurga
+title: "[Lugu]: <Lühike kirjeldus>"
+labels: ["user-story", "vajab-hindamist"]
+body:
+  - type: textarea
+    id: story
+    attributes:
+      label: Kasutajalugu
+      description: Kasuta formaati "KUI (roll), SOOVIN MA (tegevus), ET (eesmärk/kasu)"
+      placeholder: |
+        Kui külaline,
+        soovin ma näha koolimaja 3D mudelit,
+        et saaksing enne külastust ruumidega tutvuda.
+    validations:
+      required: true
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Vastuvõtukriteeriumid (Acceptance Criteria)
+      description: Millised tingimused peavad olema täidetud, et see lugu oleks "VALMIS"?
+      placeholder: |
+        - [ ] Mudel laeb brauseris alla 5 sekundi
+        - [ ] Kasutaja saab hiirega vaadet pöörata
+        - [ ] Mobiilivaates on mudel peidetud
+    validations:
+      required: true
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Prioriteet (MoSCoW meetod)
+      options:
+        - Must Have (Peab olema)
+        - Should Have (Peaks olema)
+        - Could Have (Võiks olla)
+        - Won't Have (Hetkel ei tee)
+    validations:
+      required: true
